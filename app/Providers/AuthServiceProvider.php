@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Policies\GenresPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -13,7 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        Genre::class => GenresPolicy::class,
     ];
 
     /**
@@ -25,6 +26,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('create-genres', 'App\Policies\GenresPolicy@create');
+        Gate::define('edit-genres', 'App\Policies\GenresPolicy@edit');
+        Gate::define('delete-genres', 'App\Policies\GenresPolicy@delete');
     }
 }
