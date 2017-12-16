@@ -14,4 +14,9 @@ class Game extends Model
     {
         return $this->belongsToMany('App\Genre', 'games_genres', 'game_id');
     }
+
+    public function records()
+    {
+        return $this->hasMany('App\Record');
+    }
 }

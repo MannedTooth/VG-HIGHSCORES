@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(GamesTableSeeder::class);
         $this->call(GenresTableSeeder::class);
+        $this->call(RecordsTableSeeder::class);
 
         DB::table('games_genres')->insert([
             'game_id' => 1,

@@ -3,64 +3,60 @@
 namespace App\Http\Controllers;
 
 use App\Game;
-use App\Genre;
-use App\Http\Requests\GameRequest;
-
+use App\Record;
 use Illuminate\Http\Request;
+use App\Http\Requests\RecordRequest;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
-class GamesController extends Controller
+class RecordsController extends Controller
 {
-    public function browse()
+    public function show($nickname, Record $record)
     {
-        $games = Game::orderBy('name')->get();
+        $game = Game::where('nickname', $nickname)->first();
 
-        return view('games.browse', compact('games'));
+        return view('records.show', compact('game', 'record'));
     }
 
-    public function show($game_nickname)
+    public function create($nickname)
     {
-        $game = Game::where('nickname', $game_nickname)->first();
-
-        return view('games.show', compact('game'));
-    }
-
-    public function create()
-    {
-        if (Gate::allows('create-games'))
+        if (Gate::allows('create-records'))
         {
-            $genres = Genre::orderBy('name')->get();
+            $game = Game::where('nickname', $nickname)->first();
 
-            return view('games.create', compact('genres'));
+            return view('records.create', compact('game'));
         }
         else
         {
-            return redirect('/games');
+            return redirect('/games/{nickname}/records');
         }
     }
 
-    public function store(GameRequest $request)
+    public function store(RecordRequest $request, $nickname)
     {
+        $game = Game::where('nickname', $nickname)->first();
+
         DB::beginTransaction();
         try
         {
-            $game = Game::create([
+            Record::create([
                 'name' => request('name'),
-                'nickname' => request('nickname'),
+                'unit' => request('unit'),
+                'game_id' => $game->id,
+                'time' => $request->has('time'),
+                'decreasing' => $request->has('decreasing'),
             ]);
-
-            $game->genres()->sync(request('genre'));
 
             DB::commit();
 
-            return redirect('/games');
+            return redirect('/games/' . $game->nickname . '/records');
         }
         catch (\Throwable $e)
         {
             DB::rollback();
 
-            return redirect('/games');
+            return redirect('/games/' . $game->nickname . '/records');
         }
     }
 
@@ -103,24 +99,24 @@ class GamesController extends Controller
         }
     }
 
-    public function delete(Game $game)
+    public function delete($game_nickname, Record $record)
     {
-        if (Gate::allows('delete-games'))
+        if (Gate::allows('delete-records'))
         {
             DB::beginTransaction();
             try
             {
-                $game->delete();
+                $record->delete();
 
                 DB::commit();
 
-                return redirect('/games');
+                return redirect('/games/' . $game_nickname);
             }
             catch (\Throwable $e)
             {
                 DB::rollback();
 
-                return redirect('/games');
+                return redirect('/games/' . $game_nickname);
             }
         }
     }

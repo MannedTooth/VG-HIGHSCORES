@@ -35,5 +35,10 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('create-genres', 'App\Policies\GenresPolicy@create');
         Gate::define('edit-genres', 'App\Policies\GenresPolicy@edit');
         Gate::define('delete-genres', 'App\Policies\GenresPolicy@delete');
+
+        //Records
+        Gate::define('create-records', 'App\Policies\RecordsPolicy@create');
+        Gate::define('edit-records', 'App\Policies\RecordsPolicy@edit');
+        Gate::define('delete-records', 'App\Policies\RecordsPolicy@delete');
     }
 }

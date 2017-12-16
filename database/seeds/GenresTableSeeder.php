@@ -11,6 +11,6 @@ class GenresTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Genre::class, 20)->create();
+        factory(App\Genre::class, 7)->create();
     }
 }

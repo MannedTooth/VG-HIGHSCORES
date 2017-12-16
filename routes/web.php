@@ -22,11 +22,11 @@ Route::get('/logout', 'Auth\LoginController@logout');
 
 //Games
 Route::get('/games', 'GamesController@browse');
-Route::get('/games/{nickname}/records', 'GamesController@show');
 Route::get('/games/create', 'GamesController@create');
 Route::post('/games/create', 'GamesController@store');
-Route::get('/games/edit/{nickname}', 'GamesController@edit');
-Route::put('/games/edit/{nickname}', 'GamesController@update');
+Route::get('/games/{game_nickname}', 'GamesController@show');
+Route::get('/games/{game_nickname}/edit', 'GamesController@edit');
+Route::put('/games/{game_nickname}/edit', 'GamesController@update');
 Route::delete('/games/{game}', 'GamesController@delete');
 
 //Genres
@@ -36,3 +36,11 @@ Route::post('/genres/create', 'GenresController@store');
 Route::get('/genres/edit/{genre}', 'GenresController@edit');
 Route::put('/genres/edit/{genre}', 'GenresController@update');
 Route::delete('/genres/{genre}', 'GenresController@delete');
+
+//Records
+Route::get('/games/{game_nickname}/records/create', 'RecordsController@create');
+Route::post('/games/{game_nickname}/records/create', 'RecordsController@store');
+Route::get('/games/{game_nickname}/records/{record}', 'RecordsController@show');
+Route::get('/games/{game_nickname}/records/{record}/edit', 'RecordsController@edit');
+Route::put('/games/{game_nickname}/records/{record}/edit', 'RecordsController@update');
+Route::delete('/games/{game_nickname}/records/{record}', 'RecordsController@delete');

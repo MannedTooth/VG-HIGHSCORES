@@ -12,12 +12,12 @@
             <li class="list-inline-item">
                 <img src="{{ asset('/img/' + $game->nickname + '/cover.png') }}" height="128px">
                 <p>
-                    <a href="/games/{{ $game->nickname }}/records" class="link-color-white">{{ $game->name }}</a>
-                    <br><small class="text-light">0 records</small>
+                    <a href="/games/{{ $game->nickname }}" class="link-color-white">{{ $game->name }}</a>
+                    <br><small class="text-light">{{ $game->records()->count() }} records</small>
                 @if (Gate::allows('edit-games') || Gate::allows('delete-games'))
                     <br>
                         @if (Gate::allows('edit-games'))
-                            <a href="/games/edit/{{ $game->nickname }}">
+                            <a href="/games/{{ $game->nickname }}/edit">
                                 <i>edit</i>
                             </a>
                         @endif
