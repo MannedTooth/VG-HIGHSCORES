@@ -20,8 +20,17 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', 'Auth\LoginController@logout');
 
+//Games
+Route::get('/games', 'GamesController@browse');
+Route::get('/games/{nickname}/records', 'GamesController@show');
+Route::get('/games/create', 'GamesController@create');
+Route::post('/games/create', 'GamesController@store');
+Route::get('/games/edit/{nickname}', 'GamesController@edit');
+Route::put('/games/edit/{nickname}', 'GamesController@update');
+Route::delete('/games/{game}', 'GamesController@delete');
+
 //Genres
-Route::get('/genres', 'GenresController@index');
+Route::get('/genres', 'GenresController@browse');
 Route::get('/genres/create', 'GenresController@create');
 Route::post('/genres/create', 'GenresController@store');
 Route::get('/genres/edit/{genre}', 'GenresController@edit');

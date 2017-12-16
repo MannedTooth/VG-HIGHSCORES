@@ -31,4 +31,6 @@ class User extends Authenticatable
     {
         return $this->isAdmin;
     }
+
+    public $salut = "sup";
 }

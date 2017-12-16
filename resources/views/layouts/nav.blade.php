@@ -6,6 +6,7 @@
                 Browse
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/games">Games</a>
                 <a class="dropdown-item" href="/genres">Genres</a>
             </div>
         </li>

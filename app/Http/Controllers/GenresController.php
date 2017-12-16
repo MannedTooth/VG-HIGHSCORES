@@ -3,18 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Genre;
+use App\Http\Requests\GenreRequest;
+
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\Request;
-use App\Http\Requests\GenreRequest;
 
 class GenresController extends Controller
 {
-    public function index()
+    public function browse()
     {
         $genres = Genre::orderBy('name')->get();
 
-        return view('genres.index', compact('genres'));
+        return view('genres.browse', compact('genres'));
     }
 
     public function create()

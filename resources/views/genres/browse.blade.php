@@ -3,7 +3,7 @@
 @section('title', 'Genres')
 
 @section('content')
-    <h1>Genres</h1>
+    <h1 class="text-light">Genres</h1>
     @if (Gate::allows('create-genres'))
         <a href="/genres/create">Create a new genre</a>
     @endif
@@ -11,6 +11,7 @@
         <thead>
             <tr>
                 <th scope="col">Name</th>
+                <th scopre="col">Number of games</th>
                 @if (Gate::allows('edit-genres') || Gate::allows('delete-genres'))
                     <th scope="col">Options</th>
                 @endif
@@ -20,6 +21,7 @@
             @foreach($genres as $genre)
                 <tr>
                     <td>{{ $genre->name }}</td>
+                    <td>{{ $genre->games()->count() }}</td>
                     @if (Gate::allows('edit-genres') || Gate::allows('delete-genres'))
                         <td>
                             @if (Gate::allows('edit-genres'))

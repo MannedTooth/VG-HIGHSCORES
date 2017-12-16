@@ -11,6 +11,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(GamesTableSeeder::class);
         $this->call(GenresTableSeeder::class);
+
+        DB::table('games_genres')->insert([
+            'game_id' => 1,
+            'genre_id' => 2
+        ]);
     }
 }
