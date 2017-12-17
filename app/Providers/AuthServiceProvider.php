@@ -26,6 +26,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        //Attempts
+        Gate::define('create-attempts', 'App\Policies\AttemptsPolicy@create');
+        Gate::define('edit-attempts', 'App\Policies\AttemptsPolicy@edit');
+        Gate::define('delete-attempts', 'App\Policies\AttemptsPolicy@delete');
+
         //Games
         Gate::define('create-games', 'App\Policies\GamesPolicy@create');
         Gate::define('edit-games', 'App\Policies\GamesPolicy@edit');

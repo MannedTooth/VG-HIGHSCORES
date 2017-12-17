@@ -10,4 +10,13 @@ class Record extends Model
         'name', 'unit', 'time', 'decreasing', 'game_id', 'parent_record_id',
     ];
 
+    public function attempts()
+    {
+        return $this->hasMany('App\Attempt');
+    }
+
+    public function game()
+    {
+        return $this->belongsTo('App\Game');
+    }
 }

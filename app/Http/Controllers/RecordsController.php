@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Game;
 use App\Record;
+
 use Illuminate\Http\Request;
 use App\Http\Requests\RecordRequest;
 
@@ -50,52 +51,47 @@ class RecordsController extends Controller
 
             DB::commit();
 
-            return redirect('/games/' . $game->nickname . '/records');
+            return redirect('/games/' . $nickname);
         }
         catch (\Throwable $e)
         {
             DB::rollback();
 
-            return redirect('/games/' . $game->nickname . '/records');
+            return redirect('/games/' . $nickname);
         }
     }
 
-    public function edit($game_nickname)
+    public function edit($game_nickname, Record $record)
     {
-        if (Gate::allows('edit-games'))
+        if (Gate::allows('edit-records'))
         {
-            $game = Game::where('nickname', $game_nickname)->first();
-
-            $genres = Genre::orderBy('name')->get();
-
-            return view('games.edit', compact('game', 'genres'));
+            return view('records.edit', compact('record'));
         }
         else
         {
-            return redirect('/games');
+            return redirect('/');
         }
     }
 
-    public function update(GameRequest $request, $game_nickname)
+    public function update(RecordRequest $request, $game_nickname, Record $record)
     {
         DB::beginTransaction();
         try
         {
-            $game = Game::where('nickname', $game_nickname)->first();
-
-            $game->update(['name' => request('name'), 'nickname' => request('nickname')]);
-
-            $game->genres()->sync(request('genre'));
+            $record->update([
+                'name' => request('name'),
+                'nickname' => request('nickname'),
+                ]);
 
             DB::commit();
 
-            return redirect('/games');
+            return redirect('/games/' . $record->game->nickname);
         }
         catch (\Throwable $e)
         {
             DB::rollback();
 
-            return redirect('/games');
+            return redirect('/games/' . $record->game->nickname);
         }
     }
 

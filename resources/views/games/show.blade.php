@@ -23,7 +23,7 @@
         @foreach($game->records as $record)
             <tr>
                 <td><a href="/games/{{ $game->nickname }}/records/{{ $record->id }}">{{ $record->name }}</a></td>
-                <td>0</td>
+                <td>{{ $record->attempts->count() }}</td>
                 @if (Gate::allows('edit-records') || Gate::allows('delete-records'))
                     <td>
                         @if (Gate::allows('edit-records'))

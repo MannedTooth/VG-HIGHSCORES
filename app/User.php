@@ -32,5 +32,8 @@ class User extends Authenticatable
         return $this->isAdmin;
     }
 
-    public $salut = "sup";
+    public function attempts()
+    {
+        return $this->hasMany('App\Attempt');
+    }
 }

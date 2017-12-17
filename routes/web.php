@@ -20,6 +20,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', 'Auth\LoginController@logout');
 
+//Attempts
+Route::get('/games/{game_nickname}/records/{record}/attempts/create', 'AttemptsController@create');
+Route::post('/games/{game_nickname}/records/{record}/attempts/create', 'AttemptsController@store');
+Route::get('/games/{game_nickname}/records/{record}/attempts/{attempt}', 'AttemptsController@show');
+Route::get('/games/{game_nickname}/records/{record}/attempts/{attempt}/edit', 'AttemptsController@edit');
+Route::put('/games/{game_nickname}/records/{record}/attempts/{attempt}/edit', 'AttemptsController@update');
+Route::delete('/games/{game_nickname}/records/{record}/attempts/{attempt}', 'AttemptsController@delete');
+
 //Games
 Route::get('/games', 'GamesController@browse');
 Route::get('/games/create', 'GamesController@create');
