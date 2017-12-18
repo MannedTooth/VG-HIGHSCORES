@@ -13,7 +13,7 @@
                 <img src="{{ asset('storage/covers/' . $game->cover_image->source_url)  }}" height="128px">
                 <p>
                     <a href="/games/{{ $game->nickname }}" class="link-color-white">{{ $game->name }}</a>
-                    <br><small class="text-light">{{ $game->records()->count() }} records {{ $game->cover_image->source_url }}</small>
+                    <br><small class="text-light">{{ $game->records()->count() }} records</small>
                 @if (Gate::allows('edit-games') || Gate::allows('delete-games'))
                     <br>
                         @if (Gate::allows('edit-games'))
