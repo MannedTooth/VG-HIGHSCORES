@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGamesTable extends Migration
+class CreateImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,10 @@ class CreateGamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('games', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->increments('id');
-
-            $table->string('name')->unique();
-            $table->string('nickname', 5)->unique();
-
-            $table->integer('cover_image_id')->unsigned()->index;
-
+            $table->string('source_url');
             $table->timestamps();
-
-            $table->foreign('cover_image_id')->references('id')->on('images')->onDelete('cascade');
         });
     }
 
@@ -34,6 +27,6 @@ class CreateGamesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('games');
+        Schema::dropIfExists('images');
     }
 }

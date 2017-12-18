@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Game extends Model
 {
     protected $fillable = [
-        'name', 'nickname',
+        'name', 'nickname', 'cover_image_id',
     ];
 
     public function genres()
@@ -18,5 +18,10 @@ class Game extends Model
     public function records()
     {
         return $this->hasMany('App\Record');
+    }
+
+    public function cover_image()
+    {
+        return $this->belongsTo('App\Image', 'cover_image_id', 'id');
     }
 }

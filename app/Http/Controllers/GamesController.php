@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Game;
 use App\Genre;
+use App\Image;
 use App\Http\Requests\GameRequest;
 
 use Illuminate\Http\Request;
@@ -45,9 +46,16 @@ class GamesController extends Controller
         DB::beginTransaction();
         try
         {
+            $image = Image::create([
+                'source_url' => $request->file('image')->hashName(),
+            ]);
+
+            $request->file('image')->store('public/covers');
+
             $game = Game::create([
                 'name' => request('name'),
                 'nickname' => request('nickname'),
+                'cover_image_id' => $image->id,
             ]);
 
             $game->genres()->sync(request('genre'));
@@ -60,7 +68,7 @@ class GamesController extends Controller
         {
             DB::rollback();
 
-            return redirect('/games');
+            return redirect('/');
         }
     }
 
