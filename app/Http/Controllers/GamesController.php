@@ -97,6 +97,19 @@ class GamesController extends Controller
         {
             $game = Game::where('nickname', $game_nickname)->first();
 
+            if ($request->hasFile('image'))
+            {
+                $image = Image::create([
+                    'source_url' => $request->file('image')->hashName(),
+                ]);
+
+                $request->file('image')->store('public/covers');
+
+                $game->update([
+                    'cover_image_id' => $image->id,
+                ]);
+            }
+
             $game->update([
                 'name' => request('name'),
                 'nickname' => request('nickname'),

@@ -5,7 +5,7 @@
 @section('content')
     <h1 class="text-light">Editing a game : {{ $game->name }}</h1>
 
-    <form action="/games/{{ $game->nickname }}/edit" method="POST">
+    <form action="/games/{{ $game->nickname }}/edit" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         {{ method_field('PUT') }}
 
@@ -61,11 +61,10 @@
         <div class="form-group">
             <label class="text-light">Image</label>
 
-            <input class="form-control" type="file" name="image">
+            <input class="form-control" type="file" name="image" src="{{ asset('storage/covers/' . $game->cover_image->source_url) }}">
             @if($errors->has('image'))
                 <p class="text-danger">{{ $errors->first('image') }}</p>
             @endif
-            <img class="form-control" src="{{ asset('storage/covers/' . $game->cover_image->source_url) }}" width="128px">
         </div>
 
         <button type="submit">Create</button>

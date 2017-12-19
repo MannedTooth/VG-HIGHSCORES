@@ -28,7 +28,7 @@ class GameRequest extends FormRequest
             'nickname' => 'required|max:5|unique:games,nickname'.($this->id ? ",$this->id" : ''),
             'description' => 'required',
             'release_year' => 'required|numeric',
-            'image' => 'required|image|mimes:jpg,jpeg,png',
+            'image' => 'image|mimes:jpg,jpeg,png',
         ];
     }
 }
