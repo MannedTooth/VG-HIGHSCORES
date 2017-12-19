@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Game extends Model
 {
     protected $fillable = [
-        'name', 'nickname', 'cover_image_id',
+        'name', 'nickname', 'description', 'release_year', 'cover_image_id',
     ];
 
     public function genres()

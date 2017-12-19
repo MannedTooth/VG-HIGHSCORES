@@ -18,6 +18,8 @@ class CreateGamesTable extends Migration
 
             $table->string('name')->unique();
             $table->string('nickname', 5)->unique();
+            $table->string('description');
+            $table->integer('release_year')->unsigned();
 
             $table->integer('cover_image_id')->unsigned()->index;
 

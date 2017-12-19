@@ -26,6 +26,8 @@ class GameRequest extends FormRequest
         return [
             'name' => 'required|max:255|unique:games,name'.($this->id ? ",$this->id" : ''),
             'nickname' => 'required|max:5|unique:games,nickname'.($this->id ? ",$this->id" : ''),
+            'description' => 'required',
+            'release_year' => 'required|numeric',
             'image' => 'required|image|mimes:jpg,jpeg,png',
         ];
     }

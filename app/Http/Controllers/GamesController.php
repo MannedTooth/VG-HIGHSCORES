@@ -55,6 +55,8 @@ class GamesController extends Controller
             $game = Game::create([
                 'name' => request('name'),
                 'nickname' => request('nickname'),
+                'description' => request('description'),
+                'release_year' => request('release_year'),
                 'cover_image_id' => $image->id,
             ]);
 
@@ -95,7 +97,12 @@ class GamesController extends Controller
         {
             $game = Game::where('nickname', $game_nickname)->first();
 
-            $game->update(['name' => request('name'), 'nickname' => request('nickname')]);
+            $game->update([
+                'name' => request('name'),
+                'nickname' => request('nickname'),
+                'description' => request('description'),
+                'release_year' => request('release_year'),
+            ]);
 
             $game->genres()->sync(request('genre'));
 

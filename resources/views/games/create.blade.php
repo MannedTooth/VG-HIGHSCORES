@@ -25,6 +25,22 @@
         </div>
 
         <div class="form-group">
+            <label class="text-light">Short description</label>
+            <input class="form-control" type="text" name="description" placeholder="Ex.: Kill monsters, earn money, save the princess. Repeat.">
+            @if($errors->has('description'))
+                <p class="text-danger">{{ $errors->first('description') }}</p>
+            @endif
+        </div>
+
+        <div class="form-group">
+            <label class="text-light">Year of release</label>
+            <input class="form-control" type="number" min="1900" max="2100" name="release_year">
+            @if($errors->has('release_year'))
+                <p class="text-danger">{{ $errors->first('release_year') }}</p>
+            @endif
+        </div>
+
+        <div class="form-group">
             <label class="text-light">Genre</label>
             <select class="form-control" name="genre">
                 @foreach ($genres as $genre)
