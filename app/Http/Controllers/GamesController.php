@@ -60,7 +60,7 @@ class GamesController extends Controller
                 'cover_image_id' => $image->id,
             ]);
 
-            $game->genres()->sync(request('genre'));
+            $game->genres()->sync(request('genres'));
 
             DB::commit();
 
@@ -117,7 +117,7 @@ class GamesController extends Controller
                 'release_year' => request('release_year'),
             ]);
 
-            $game->genres()->sync(request('genre'));
+            $game->genres()->sync(request('genres'));
 
             DB::commit();
 

@@ -41,12 +41,18 @@
         </div>
 
         <div class="form-group">
-            <label class="text-light">Genre</label>
-            <select class="form-control" name="genre">
-                @foreach ($genres as $genre)
-                    <option value="{{ $genre->id }}">{{ $genre->name }}</option>
-                @endforeach
-            </select>
+            <label class="text-light">Genres</label><br>
+            <div class="container">
+                <div class="row">
+                    @foreach($genres as $genre)
+                        <div class="col">
+                            <label class="form-check-label text-light">
+                                <input class="form-check-input" type="checkbox" name="genres[]" value="{{ $genre->id }}"> {{ $genre->name }}
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
 
         <div class="form-group">
@@ -57,6 +63,6 @@
             @endif
         </div>
 
-        <button type="submit">Create</button>
+        <button class="btn btn-primary" type="submit">Create</button>
     </form>
 @endsection

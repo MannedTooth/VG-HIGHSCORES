@@ -44,18 +44,18 @@
         </div>
 
         <div class="form-group">
-            <label class="text-light">Genre</label>
-            @if ($game->genres()->count() > 0)
-                <select class="form-control" name="genre">
-                    @foreach ($genres as $genre)
-                            @if ($genre->id == $game->genres()->first()->id)
-                                <option value="{{ $genre->id }}" selected>{{ $genre->name }}</option>
-                            @else
-                                <option value="{{ $genre->id }}">{{ $genre->name }}</option>
-                            @endif
+            <label class="text-light">Genres</label><br>
+            <div class="container">
+                <div class="row">
+                    @foreach($genres as $genre)
+                        <div class="col">
+                            <label class="form-check-label text-light">
+                                <input class="form-check-input" type="checkbox" name="genres[]" value="{{ $genre->id }}" {{ $game->genres->contains($genre) ? "checked" : "" }}> {{ $genre->name }}
+                            </label>
+                        </div>
                     @endforeach
-                </select>
-            @endif
+                </div>
+            </div>
         </div>
 
         <div class="form-group">
@@ -67,6 +67,6 @@
             @endif
         </div>
 
-        <button type="submit">Create</button>
+        <button type="submit">Edit</button>
     </form>
 @endsection
